@@ -525,10 +525,14 @@ h1, h2, h3, h4 { line-height: 1.06; font-weight: 400; color: var(--crema); }
 @media (max-aspect-ratio: 3 / 4) {
   .hero__fondo::after {
     /* 250% es el punto justo: más grande vuelve al primerísimo plano de pan y
-       más pequeño la hamburguesa se pierde. El 74% horizontal la deja
-       completa con el vaquero todavía en cuadro. */
+       más pequeño la escena se pierde.
+
+       El 54% horizontal es el encuadre: deja al vaquero sobre la línea de
+       tercios con el sol detrás y la hamburguesa entrando cortada por el
+       borde derecho. Más a la derecha y la hamburguesa se come el cuadro;
+       más a la izquierda y queda demasiado lejos. */
     background-size: 250% auto;
-    background-position: 74% 38%;
+    background-position: 54% 38%;
     -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 14%, #000 82%, transparent 100%);
             mask-image: linear-gradient(to bottom, transparent 0%, #000 14%, #000 82%, transparent 100%);
   }
