@@ -117,13 +117,43 @@ Los colores de la marca están al inicio de `css/estilos.css`, en `:root`.
 |---|---|
 | `datos.js` | Datos del negocio, carta, zonas, formas de pago y "el código de la casa" |
 | `iconos.js` | Toda la iconografía western dibujada en SVG + ornamentos |
+| `scroll.js` | Parallax, barra de avance, balanceo de los letreros y contadores |
 | `carrito.js` | Carrito en `localStorage`, botón flotante, la comanda y los avisos |
 | `app.js` | Header, menú móvil, animaciones, video del negocio y secciones del index |
 | `carta.js` | Filtros y buscador de la carta |
 | `checkout.js` | Validación, cálculo del domicilio y creación del pedido |
 | `seguimiento.js` | Simulación del estado y armado del mensaje de WhatsApp |
 
-El orden de carga importa: `datos.js` → `iconos.js` → `carrito.js` → `app.js` → (`carta.js` / `checkout.js` / `seguimiento.js`).
+El orden de carga importa: `datos.js` → `iconos.js` → `carrito.js` → `app.js` →
+`scroll.js` → (`carta.js` / `checkout.js` / `seguimiento.js`).
+
+## Efectos de scroll
+
+Están todos en `js/scroll.js`, dentro de **un solo bucle de
+`requestAnimationFrame`** que arranca cuando hay scroll y se apaga solo cuando
+ya no queda nada moviéndose. En cada cuadro primero se lee todo el layout y
+después se escribe, para no forzar reflows; los valores se publican como
+variables CSS y el trabajo pesado lo hace el compositor.
+
+| Efecto | Qué hace |
+|---|---|
+| Barra de avance | Una mecha encendida arriba de la página con el progreso de lectura |
+| Parallax del hero | La foto se queda atrás mientras el contenido se adelanta y se desvanece |
+| Cartel "Se Busca" | El fondo y el papel se mueven a distinta velocidad |
+| Montaje del video | El celular flota levemente respecto a la sección |
+| **Letreros de las sedes** | Se mecen: cuelgan de cuerdas, así que se balancean con el scroll |
+| Contador | El "+1.000" del Burger Fest cuenta hacia arriba al entrar en pantalla |
+| Entradas | Los bloques aparecen con dirección propia (`--izq`, `--der`, `--clavo`, `--escala`) y escalonados |
+
+El balanceo de los letreros es un resorte amortiguado que responde a la
+**aceleración** del scroll, no a su velocidad: un letrero colgado se mece cuando
+arrancas o frenas, no mientras bajas a ritmo constante. Modelarlo con la
+velocidad hacía que se quedara inclinado contra el tope en vez de volver al
+reposo.
+
+Todo respeta `prefers-reduced-motion: reduce`: con esa preferencia activa se
+apagan parallax y balanceo, y solo queda la barra de avance, que es información
+y no decoración.
 
 ## Sistema visual
 

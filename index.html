@@ -57,6 +57,8 @@
     <div class="hero__velo"></div>
     <div class="hero__calor" aria-hidden="true"></div>
 
+    <!-- hero__desliz recibe el parallax del scroll; hero__contenido la entrada -->
+    <div class="hero__desliz">
     <div class="hero__contenido">
       <img class="hero__logo" src="statics/logo-transparente.png" alt="Texas Parrilla Bar">
 
@@ -85,6 +87,7 @@
         <span class="hero__dato" data-icono="tel">320 204 4872</span>
       </div>
     </div>
+    </div>
 
     <div class="hero__scroll" aria-hidden="true" data-icono="herradura">
       <span>Sigue</span>
@@ -101,7 +104,7 @@
     <div class="contenedor">
       <div class="historia__grid">
 
-        <div class="historia__texto revelar">
+        <div class="historia__texto revelar revelar--izq">
           <p class="enc__kicker" data-orn="estrella" style="margin-bottom:1.3rem">Nuestra historia</p>
           <h2 class="historia__titulo">Del llano a la brasa,<br>sin intermediarios</h2>
 
@@ -128,7 +131,7 @@
         </div>
 
         <!-- Montaje del video: panel de cuero + celular -->
-        <div class="montaje revelar">
+        <div class="montaje revelar revelar--der">
           <div class="montaje__brillo" aria-hidden="true"></div>
           <div class="montaje__panel madera madera--clara" aria-hidden="true"></div>
           <div class="montaje__sombra" aria-hidden="true"></div>
@@ -199,7 +202,7 @@
         <h2 class="enc__titulo relieve-texto">Los que nunca fallan</h2>
       </div>
 
-      <div class="tabla madera revelar remaches">
+      <div class="tabla madera revelar revelar--clavo remaches">
         <span class="remache"></span><span class="remache"></span>
         <span class="remache"></span><span class="remache"></span>
 
@@ -219,11 +222,11 @@
 
   <!-- ================= CARTEL "SE BUSCA" (Burger Fest) ============= -->
   <section class="wanted-zona">
-    <article class="wanted pergamino revelar">
+    <article class="wanted pergamino revelar revelar--escala">
       <h2 class="wanted__titulo">Se Busca</h2>
       <p class="wanted__sub">Recompensa · Burger Fest</p>
 
-      <p class="wanted__cifra">+1.000</p>
+      <p class="wanted__cifra" data-contar="1000" data-prefijo="+">+1.000</p>
       <p class="wanted__que">hamburguesas en un fin de semana</p>
 
       <p class="wanted__texto">
@@ -358,5 +361,6 @@
 <script src="js/iconos.js"></script>
 <script src="js/carrito.js"></script>
 <script src="js/app.js"></script>
+<script src="js/scroll.js"></script>
 </body>
 </html>

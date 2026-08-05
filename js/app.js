@@ -57,13 +57,6 @@ function montarIconos(raiz = document) {
   });
 }
 
-/* Revela elementos que se crearon después del observer inicial */
-function revelarPronto(contenedor, retardo = 120) {
-  contenedor.querySelectorAll('.revelar').forEach((el, i) =>
-    setTimeout(() => el.classList.add('es-visible'), retardo + i * 110)
-  );
-}
-
 /* ================================ INICIO ================================ */
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -108,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <h3>${r.titulo}</h3>
         <p>${r.texto}</p>
       </article>`).join('');
-    revelarPronto(codigoGrid);
+    // el observador del final de este archivo se encarga de revelarlas
   }
 
   /* --------------------- La tabla del día (index) ----------------------- */
@@ -121,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const sedesGrid = document.getElementById('sedesGrid');
   if (sedesGrid) {
     sedesGrid.innerHTML = SEDES.map((s) => `
-      <div class="sede-colgante revelar">
+      <div class="sede-colgante revelar revelar--clavo">
         <article class="sede madera remaches">
           <span class="remache"></span><span class="remache"></span>
           <span class="remache"></span><span class="remache"></span>
@@ -141,7 +134,6 @@ document.addEventListener('DOMContentLoaded', () => {
           </div>
         </article>
       </div>`).join('');
-    revelarPronto(sedesGrid);
   }
 
   /* ------------------------------ Redes --------------------------------- */
@@ -237,13 +229,22 @@ document.addEventListener('DOMContentLoaded', () => {
   montarIconos();
 
   /* -------------------- Aparecer al hacer scroll ------------------------ */
-  const revelables = document.querySelectorAll('.revelar:not(.es-visible)');
+  const revelables = [...document.querySelectorAll('.revelar:not(.es-visible)')];
+
+  /* El escalonado va por CSS (`transition-delay: var(--i) * 95ms`) y el índice
+     es la posición entre hermanos, no el orden en que dispara el observer:
+     así un grupo de tarjetas siempre entra de izquierda a derecha. */
+  revelables.forEach((el) => {
+    const hermanos = [...(el.parentElement?.children || [])].filter((h) => h.classList.contains('revelar'));
+    el.style.setProperty('--i', Math.max(0, hermanos.indexOf(el)));
+  });
+
   if (revelables.length && 'IntersectionObserver' in window) {
     const obs = new IntersectionObserver(
       (entradas) => {
-        entradas.forEach((e, i) => {
+        entradas.forEach((e) => {
           if (!e.isIntersecting) return;
-          setTimeout(() => e.target.classList.add('es-visible'), i * 90);
+          e.target.classList.add('es-visible');
           obs.unobserve(e.target);
         });
       },

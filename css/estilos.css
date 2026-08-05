@@ -486,7 +486,19 @@ h1, h2, h3, h4 { line-height: 1.06; font-weight: 400; color: var(--crema); }
   padding: calc(var(--header-h) + 2.5rem) 0 6.5rem;
 }
 
+/* Dos capas: la de fuera lleva el parallax del scroll y la de dentro la
+   deriva lenta de ambiente. Así cada transform vive en su propio elemento y
+   no se pisan. El -12% vertical da margen para que el parallax no destape
+   los bordes de la foto. */
 .hero__fondo {
+  position: absolute;
+  inset: -12% 0;
+  transform: translate3d(0, calc(var(--hero-fondo-y, 0) * 1px), 0);
+  will-change: transform;
+}
+
+.hero__fondo::after {
+  content: '';
   position: absolute;
   inset: 0;
   background-image: url('../statics/hero_responsive.PNG');
@@ -1321,12 +1333,11 @@ h1, h2, h3, h4 { line-height: 1.06; font-weight: 400; color: var(--crema); }
   border-radius: var(--r-md);
   border: 3px solid var(--cuero);
   box-shadow: var(--s-lg);
-  transform: rotate(-.7deg);
+  /* el giro y el balanceo viven en la sección de efectos de scroll */
   transition: transform .45s cubic-bezier(.2, .8, .25, 1), box-shadow .35s ease;
 }
 
-.sede-colgante:nth-child(even) .sede { transform: rotate(.9deg); }
-.sede-colgante:hover .sede { transform: rotate(0deg) translateY(-5px); box-shadow: var(--s-lg), 0 0 40px rgba(240, 147, 43, .18); }
+.sede-colgante:hover .sede { box-shadow: var(--s-lg), 0 0 40px rgba(240, 147, 43, .18); }
 
 .sede__ciudad {
   font-family: var(--f-titular);
@@ -2086,9 +2097,73 @@ h1, h2, h3, h4 { line-height: 1.06; font-weight: 400; color: var(--crema); }
 
 .nota-demo b { color: var(--oro); }
 
-/* ==================== 22. APARECER AL HACER SCROLL ====================== */
-.revelar { opacity: 0; transform: translateY(30px); transition: opacity .8s ease, transform .8s cubic-bezier(.2, .8, .25, 1); }
+/* ==================== 22. EFECTOS DE SCROLL ============================= */
+
+/* --- Aparecer al entrar en pantalla --- */
+.revelar {
+  opacity: 0;
+  transform: translate3d(0, 32px, 0);
+  transition:
+    opacity .85s ease,
+    transform .85s cubic-bezier(.2, .8, .25, 1);
+  transition-delay: calc(var(--i, 0) * 95ms);
+}
+
+/* Variantes de dirección: el texto entra por un lado, la imagen por el otro */
+.revelar--izq { transform: translate3d(-42px, 0, 0); }
+.revelar--der { transform: translate3d(42px, 0, 0); }
+.revelar--escala { transform: scale(.94); }
+
+/* Como si lo clavaran en la pared: entra torcido y se endereza */
+.revelar--clavo { transform: translate3d(0, 30px, 0) rotate(-2.2deg); }
+
 .revelar.es-visible { opacity: 1; transform: none; }
+
+/* --- Barra de avance de lectura: una mecha encendida --- */
+.progreso {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 940;
+  height: 3px;
+  transform: scaleX(var(--avance, 0));
+  transform-origin: 0 50%;
+  background: linear-gradient(90deg, #a8300f, var(--brasa) 35%, var(--brasa-cl) 75%, var(--oro));
+  box-shadow: 0 0 14px rgba(240, 147, 43, .7);
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* --- Parallax del hero --- */
+.hero__desliz {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  display: grid;
+  place-items: center;
+  transform: translate3d(0, calc(var(--hero-y, 0) * 1px), 0);
+  opacity: var(--hero-op, 1);
+  will-change: transform, opacity;
+}
+
+/* --- Parallax del cartel "Se Busca" --- */
+.wanted-zona::before { transform: translate3d(0, calc(var(--fondo-y, 0) * 1px), 0) scale(1.14); }
+.wanted { transform: rotate(-1.3deg) translate3d(0, calc(var(--cartel-y, 0) * 1px), 0); }
+
+/* --- El montaje del video flota un poco --- */
+.montaje { transform: translate3d(0, calc(var(--montaje-y, 0) * 1px), 0); }
+
+/* --- Los letreros de las sedes se mecen: cuelgan de cuerdas --- */
+.sede {
+  transform-origin: top center;
+  transform: rotate(calc(var(--base-giro, -.7deg) + var(--balanceo, 0) * var(--peso, 1) * 1deg));
+}
+
+.sede-colgante:nth-child(even) .sede { --base-giro: .9deg; }
+
+/* Al pasar el mouse el letrero se endereza y se detiene */
+.sede-colgante:hover .sede {
+  transform: rotate(0deg) translateY(-5px);
+}
 
 /* ========================== 23. RESPONSIVE ============================== */
 @media (max-width: 1000px) {
@@ -2161,7 +2236,15 @@ h1, h2, h3, h4 { line-height: 1.06; font-weight: 400; color: var(--crema); }
     scroll-behavior: auto !important;
   }
   .revelar { opacity: 1; transform: none; }
-  .hero__fondo { transform: scale(1.02); }
+
+  /* Se anulan parallax y balanceo: quedan quietos en su posición de reposo */
+  .hero__fondo { transform: none; }
+  .hero__fondo::after { transform: scale(1.02); }
+  .hero__desliz { transform: none; opacity: 1; }
+  .wanted-zona::before { transform: scale(1.14); }
+  .wanted { transform: rotate(-1.3deg); }
+  .montaje { transform: none; }
+  .sede { transform: rotate(var(--base-giro, -.7deg)); }
 }
 
 /* =========================== 25. IMPRESIÓN ============================== */
