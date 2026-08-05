@@ -1,0 +1,25 @@
+# Dependencias (este proyecto no tiene, pero por si se agregan)
+node_modules/
+
+# Variables de entorno
+.env
+.env.*
+!.env.example
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editores
+.vscode/
+.idea/
+*.swp
+
+# Logs
+*.log
+npm-debug.log*
+
+# Temporales de trabajo
+__*.html
+__*.js

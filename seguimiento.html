@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es-CO">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sigue tu pedido — TEXAS · Parrilla Bar</title>
+<meta name="description" content="Estado en vivo de tu domicilio de TEXAS Parrilla Bar.">
+<meta name="theme-color" content="#0b0908">
+<meta name="robots" content="noindex">
+<link rel="icon" href="statics/logo-transparente.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Bebas+Neue&family=Rye&family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/estilos.css">
+</head>
+
+<body data-flotante="no">
+
+<header class="header header--pegado" id="header">
+  <div class="header__interior">
+    <a class="marca" href="index.html" aria-label="TEXAS Parrilla Bar — inicio">
+      <img class="marca__logo" src="statics/logo-transparente.png" alt="Logo de Texas Parrilla Bar">
+      <span class="marca__texto">
+        <span class="marca__nombre">TEXAS</span>
+        <span class="marca__sub">Parrilla Bar</span>
+      </span>
+    </a>
+
+    <nav class="nav" id="nav" aria-label="Navegación principal">
+      <a class="nav__enlace" href="index.html#historia">La casa</a>
+      <a class="nav__enlace" href="carta.html">La carta</a>
+      <a class="nav__enlace" href="index.html#sedes">Sedes</a>
+      <a class="nav__enlace" href="index.html#contacto">Contacto</a>
+    </nav>
+
+    <div class="header__acciones">
+      <a class="btn btn--fantasma btn--sm" href="carta.html">Nuevo pedido</a>
+      <button class="menu-btn" id="menuBtn" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main class="pagina">
+  <div class="contenedor">
+
+    <!-- Sin pedido -->
+    <div id="sinPedido" hidden>
+      <div class="vacio" style="max-width:540px; margin-inline:auto">
+        <span class="vacio__icono" data-icono="cactus" style="color:rgba(201,164,118,.35)"></span>
+        <h1 class="enc__titulo" style="font-size:2rem; color:var(--crema)">No encontramos ese pedido</h1>
+        <p style="color:var(--crema-3)">Puede que ya lo hayas cerrado o que el enlace esté incompleto. Arma uno nuevo, la parrilla está prendida.</p>
+        <a class="btn btn--brasa" href="carta.html">Ir a la carta</a>
+      </div>
+    </div>
+
+    <!-- Con pedido -->
+    <div id="conPedido" hidden>
+
+      <section class="exito">
+        <span class="exito__sello" id="selloExito"></span>
+        <h1 class="exito__titulo">¡Pedido confirmado!</h1>
+        <p class="t-suave">Gracias <b id="nombreCliente" class="t-oro"></b>, ya tenemos tu pedido en la parrilla.</p>
+        <p class="exito__codigo" id="codigoPedido">TX-0000</p>
+        <p class="t-suave" id="resumenEntrega"></p>
+      </section>
+
+      <div class="checkout">
+
+        <div>
+          <section class="ficha">
+            <h2 class="ficha__titulo"><span class="ficha__num" data-icono="brasa"></span> Estado de tu pedido</h2>
+
+            <div class="pasos" id="pasos"></div>
+
+            <div>
+              <div class="resumen-linea" style="padding-bottom:0">
+                <span id="etiquetaTiempo">Tiempo estimado de entrega</span>
+                <span class="t-brasa" id="tiempoRestante">—</span>
+              </div>
+              <div class="barra-tiempo"><div class="barra-tiempo__relleno" id="barra"></div></div>
+            </div>
+
+            <div class="hero__acciones" style="margin-top:2rem; justify-content:flex-start">
+              <a class="btn btn--wa" id="btnWhatsApp" href="#" target="_blank" rel="noopener" data-icono="wa">Enviar pedido por WhatsApp</a>
+              <a class="btn btn--fantasma" href="tel:+573202044872" data-icono="tel">Llamar</a>
+            </div>
+          </section>
+
+          <section class="ficha">
+            <h2 class="ficha__titulo" style="font-size:1.3rem">Datos de la entrega</h2>
+            <div id="detalleEntrega"></div>
+          </section>
+        </div>
+
+        <aside class="resumen">
+          <div class="ficha">
+            <h2 class="ficha__titulo" style="font-size:1.3rem; margin-bottom:1.3rem">Tu pedido</h2>
+            <div class="resumen__items" id="itemsPedido"></div>
+            <div class="resumen-linea"><span>Subtotal</span><span id="subtotalPedido">—</span></div>
+            <div class="resumen-linea"><span>Domicilio</span><span id="domicilioPedido">—</span></div>
+            <div class="resumen-linea resumen-linea--total"><span>Total</span><strong id="totalPedido">—</strong></div>
+
+            <a class="btn btn--brasa btn--bloque" href="carta.html" style="margin-top:1.4rem">Pedir otra vez</a>
+            <a class="btn btn--fantasma btn--bloque btn--sm" href="index.html" style="margin-top:.6rem">Volver al inicio</a>
+          </div>
+        </aside>
+
+      </div>
+
+      <div class="nota-demo">
+        <b>Modo prueba.</b> Este sistema de domicilios es una demostración: el pedido se guarda en tu propio
+        navegador y el estado avanza automáticamente para que veas el flujo completo.
+        En producción se conecta al sistema real del restaurante.
+        <br>
+        <button class="btn btn--fantasma btn--sm" type="button" id="btnReiniciar" style="margin-top:1rem">Reiniciar simulación</button>
+      </div>
+
+    </div>
+
+  </div>
+</main>
+
+<footer class="footer cuero">
+  <div class="contenedor">
+    <div class="footer__legal" style="border-top:none; padding-top:0">
+      <span>© <span id="anio"></span> TEXAS · Parrilla Bar</span>
+      <span class="t-suave">Sistema de domicilios en modo prueba</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/datos.js"></script>
+<script src="js/iconos.js"></script>
+<script src="js/carrito.js"></script>
+<script src="js/app.js"></script>
+<script src="js/seguimiento.js"></script>
+</body>
+</html>

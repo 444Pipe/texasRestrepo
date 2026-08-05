@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es-CO">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Confirmar pedido — TEXAS · Parrilla Bar</title>
+<meta name="description" content="Confirma tu domicilio de TEXAS Parrilla Bar: elige sede, zona de entrega y forma de pago.">
+<meta name="theme-color" content="#0b0908">
+<meta name="robots" content="noindex">
+<link rel="icon" href="statics/logo-transparente.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Bebas+Neue&family=Rye&family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/estilos.css">
+</head>
+
+<!-- data-flotante="no": aquí ya estás dentro del pedido, el botón sobra -->
+<body data-flotante="no">
+
+<header class="header header--pegado" id="header">
+  <div class="header__interior">
+    <a class="marca" href="index.html" aria-label="TEXAS Parrilla Bar — inicio">
+      <img class="marca__logo" src="statics/logo-transparente.png" alt="Logo de Texas Parrilla Bar">
+      <span class="marca__texto">
+        <span class="marca__nombre">TEXAS</span>
+        <span class="marca__sub">Parrilla Bar</span>
+      </span>
+    </a>
+
+    <nav class="nav" id="nav" aria-label="Navegación principal">
+      <a class="nav__enlace" href="index.html#historia">La casa</a>
+      <a class="nav__enlace" href="carta.html">La carta</a>
+      <a class="nav__enlace" href="index.html#sedes">Sedes</a>
+      <a class="nav__enlace" href="index.html#domicilios">Domicilios</a>
+    </nav>
+
+    <div class="header__acciones">
+      <a class="btn btn--fantasma btn--sm" href="carta.html">Seguir pidiendo</a>
+      <button class="menu-btn" id="menuBtn" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main class="pagina">
+  <div class="contenedor">
+
+    <nav class="migas" aria-label="Ruta de navegación">
+      <a href="index.html">Inicio</a> <span aria-hidden="true">›</span>
+      <a href="carta.html">La carta</a> <span aria-hidden="true">›</span>
+      <span>Confirmar pedido</span>
+    </nav>
+
+    <!-- Estado: la comanda está vacía -->
+    <div id="vacio" hidden>
+      <div class="vacio" style="max-width:540px; margin-inline:auto">
+        <span class="vacio__icono" data-icono="sombrero" style="color:rgba(201,164,118,.35)"></span>
+        <h2 class="enc__titulo" style="font-size:2rem; color:var(--crema)">Todavía no hay nada aquí</h2>
+        <p style="color:var(--crema-3)">Vuelve a la carta, arma tu pedido y nosotros nos encargamos del resto.</p>
+        <a class="btn btn--brasa" href="carta.html">Ir a la carta</a>
+      </div>
+    </div>
+
+    <!-- Estado: checkout -->
+    <div id="checkout" hidden>
+
+      <div class="enc" style="margin-bottom:2.5rem">
+        <p class="enc__kicker" data-orn="estrella">Paso final</p>
+        <h1 class="enc__titulo relieve-texto">Confirma tu domicilio</h1>
+        <p class="enc__bajada">Faltan menos de 30 segundos para que la parrilla se prenda.</p>
+      </div>
+
+      <form class="checkout" id="formPedido" novalidate>
+
+        <!-- ---------- Columna izquierda: la comanda ---------- -->
+        <div>
+
+          <section class="ficha">
+            <h2 class="ficha__titulo"><span class="ficha__num">I</span> Tus datos</h2>
+
+            <div class="campos">
+              <div class="campo campo--ancho">
+                <label for="nombre">Nombre y apellido <span>*</span></label>
+                <input type="text" id="nombre" name="nombre" placeholder="Ej. Juan Restrepo" autocomplete="name" required>
+                <span class="campo__error">Escribe tu nombre completo (mínimo 3 letras).</span>
+              </div>
+
+              <div class="campo">
+                <label for="celular">Celular <span>*</span></label>
+                <input type="tel" id="celular" name="celular" placeholder="3201234567" inputmode="numeric" maxlength="10" autocomplete="tel" required>
+                <span class="campo__error">Necesitamos un celular colombiano de 10 dígitos que empiece por 3.</span>
+              </div>
+
+              <div class="campo">
+                <label for="sede">Sede que te atiende <span>*</span></label>
+                <select id="sede" name="sede" required></select>
+                <span class="campo__ayuda">Elige la más cercana a ti.</span>
+              </div>
+            </div>
+          </section>
+
+          <section class="ficha">
+            <h2 class="ficha__titulo"><span class="ficha__num">II</span> Entrega</h2>
+
+            <div class="opciones" id="zonas" role="radiogroup" aria-label="Zona de entrega"></div>
+            <p class="campo__error" id="errorZona" style="margin-top:.8rem">Selecciona una zona de entrega.</p>
+
+            <div class="campos" id="camposDireccion" style="margin-top:1.5rem">
+              <div class="campo campo--ancho">
+                <label for="direccion">Dirección de entrega <span>*</span></label>
+                <input type="text" id="direccion" name="direccion" placeholder="Ej. Calle 8 #1-20, casa blanca portón café" autocomplete="street-address">
+                <span class="campo__error">Escribe la dirección completa para no perdernos.</span>
+              </div>
+
+              <div class="campo campo--ancho">
+                <label for="referencia">Barrio o punto de referencia</label>
+                <input type="text" id="referencia" name="referencia" placeholder="Ej. Barrio El Centro, frente al parque">
+                <span class="campo__ayuda">Opcional, pero le ayuda mucho al domiciliario.</span>
+              </div>
+            </div>
+          </section>
+
+          <section class="ficha">
+            <h2 class="ficha__titulo"><span class="ficha__num">III</span> Forma de pago</h2>
+
+            <div class="opciones" id="pagos" role="radiogroup" aria-label="Forma de pago"></div>
+            <p class="campo__error" id="errorPago" style="margin-top:.8rem">Selecciona una forma de pago.</p>
+
+            <div class="campos" style="margin-top:1.5rem">
+              <div class="campo campo--ancho" id="campoVuelto" hidden>
+                <label for="vuelto">¿Con cuánto pagas?</label>
+                <input type="text" id="vuelto" name="vuelto" placeholder="Ej. 100000" inputmode="numeric">
+                <span class="campo__ayuda">Para llevarte los vueltos listos.</span>
+              </div>
+
+              <div class="campo campo--ancho">
+                <label for="notas">Notas para la cocina</label>
+                <textarea id="notas" name="notas" placeholder="Ej. la carne bien asada, sin cebolla, ají aparte…"></textarea>
+              </div>
+            </div>
+          </section>
+
+        </div>
+
+        <!-- ---------- Columna derecha: resumen ---------- -->
+        <aside class="resumen">
+          <div class="ficha">
+            <h2 class="ficha__titulo" style="font-size:1.3rem; margin-bottom:1.3rem">Resumen del pedido</h2>
+
+            <div class="resumen__items" id="resumenItems"></div>
+
+            <div class="resumen-linea"><span>Subtotal</span><span id="lineaSubtotal">—</span></div>
+            <div class="resumen-linea"><span>Domicilio</span><span id="lineaDomicilio">—</span></div>
+            <div class="resumen-linea"><span>Tiempo estimado</span><span id="lineaTiempo">—</span></div>
+            <div class="resumen-linea resumen-linea--total"><span>Total</span><strong id="lineaTotal">—</strong></div>
+
+            <button class="btn btn--brasa btn--bloque" type="submit" id="btnConfirmar" style="margin-top:1.4rem">
+              Confirmar pedido
+            </button>
+
+            <a class="btn btn--fantasma btn--bloque btn--sm" href="carta.html" style="margin-top:.6rem">Agregar algo más</a>
+
+            <p class="campo__ayuda" style="margin-top:1rem; text-align:center">
+              Al confirmar te damos un código para seguir tu pedido y puedes enviárnoslo por WhatsApp.
+            </p>
+          </div>
+        </aside>
+
+      </form>
+    </div>
+
+  </div>
+</main>
+
+<footer class="footer cuero">
+  <div class="contenedor">
+    <div class="footer__legal" style="border-top:none; padding-top:0">
+      <span>© <span id="anio"></span> TEXAS · Parrilla Bar</span>
+      <span class="t-suave">Sistema de domicilios en modo prueba</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/datos.js"></script>
+<script src="js/iconos.js"></script>
+<script src="js/carrito.js"></script>
+<script src="js/app.js"></script>
+<script src="js/checkout.js"></script>
+</body>
+</html>

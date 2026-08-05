@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es-CO">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Página no encontrada — TEXAS · Parrilla Bar</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0b0908">
+<link rel="icon" href="/statics/logo-transparente.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Bebas+Neue&family=Rye&family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/estilos.css">
+
+<style>
+  .perdido {
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    text-align: center;
+    padding: 3rem 1.5rem;
+  }
+  .perdido__cifra {
+    font-family: var(--f-titular);
+    font-size: clamp(5rem, 22vw, 11rem);
+    line-height: .9;
+    color: var(--brasa);
+    text-shadow: 0 3px 0 rgba(0, 0, 0, .6), 0 14px 44px rgba(0, 0, 0, .85);
+  }
+  .perdido__cactus {
+    display: block;
+    width: 86px; height: 86px;
+    margin: 0 auto 1.5rem;
+    color: var(--madera-cl);
+  }
+  .perdido__cactus svg { width: 100%; height: 100%; }
+  .perdido__acciones { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin-top: 2.4rem; }
+</style>
+</head>
+
+<body data-flotante="no">
+
+<main class="perdido">
+  <div class="contenedor">
+    <span class="perdido__cactus" data-icono="cactus"></span>
+
+    <p class="perdido__cifra">404</p>
+
+    <div class="enc" style="margin-bottom:0">
+      <p class="enc__kicker" data-orn="estrella">Te desviaste del camino</p>
+      <h1 class="enc__titulo relieve-texto">Por aquí no hay parrilla</h1>
+      <p class="enc__bajada">
+        Esta página no existe o ya la levantamos. Vuelve al rancho, que la carta
+        sigue en su sitio.
+      </p>
+    </div>
+
+    <div class="perdido__acciones">
+      <a class="btn btn--brasa" href="/" data-icono="sombrero">Volver al inicio</a>
+      <a class="btn btn--fantasma" href="/carta.html" data-icono="brasa">Ver la carta</a>
+    </div>
+  </div>
+</main>
+
+<script src="/js/datos.js"></script>
+<script src="/js/iconos.js"></script>
+<script src="/js/carrito.js"></script>
+<script src="/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+{
+  "name": "texas-parrilla-bar",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Sitio web y sistema de domicilios de TEXAS Parrilla Bar — Restrepo y Cumaral, Meta",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

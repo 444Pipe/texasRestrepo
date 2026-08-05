@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es-CO">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>La carta — TEXAS · Parrilla Bar</title>
+<meta name="description" content="Carta completa de TEXAS Parrilla Bar: picadas, hamburguesas ahumadas, carnes a la parrilla, para compartir y bar. Pide a domicilio en Restrepo y Cumaral.">
+<meta name="theme-color" content="#0b0908">
+<link rel="icon" href="statics/logo-transparente.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Bebas+Neue&family=Rye&family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/estilos.css">
+</head>
+
+<body>
+
+<header class="header header--pegado" id="header">
+  <div class="header__interior">
+    <a class="marca" href="index.html" aria-label="TEXAS Parrilla Bar — inicio">
+      <img class="marca__logo" src="statics/logo-transparente.png" alt="Logo de Texas Parrilla Bar">
+      <span class="marca__texto">
+        <span class="marca__nombre">TEXAS</span>
+        <span class="marca__sub">Parrilla Bar</span>
+      </span>
+    </a>
+
+    <nav class="nav" id="nav" aria-label="Navegación principal">
+      <a class="nav__enlace" href="index.html#historia">La casa</a>
+      <a class="nav__enlace" href="carta.html" aria-current="page">La carta</a>
+      <a class="nav__enlace" href="index.html#sedes">Sedes</a>
+      <a class="nav__enlace" href="index.html#domicilios">Domicilios</a>
+      <a class="nav__enlace" href="index.html#contacto">Contacto</a>
+    </nav>
+
+    <div class="header__acciones">
+      <button class="btn btn--brasa btn--sm" type="button" data-abrir-pedido>Mi pedido</button>
+      <button class="menu-btn" id="menuBtn" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main class="pagina">
+  <div class="contenedor">
+
+    <nav class="migas" aria-label="Ruta de navegación">
+      <a href="index.html">Inicio</a> <span aria-hidden="true">›</span> <span>La carta</span>
+    </nav>
+
+    <div class="enc">
+      <p class="enc__kicker" data-orn="estrella">Nuestra carta</p>
+      <h1 class="enc__titulo relieve-texto">Todo lo que sale de la parrilla</h1>
+      <p class="enc__bajada">
+        Toca el <strong class="t-brasa">+</strong> de cada plato y arma tu domicilio.
+        Pedido mínimo <strong id="minimo"></strong> · entregas de 4:00 p.m. a 11:00 p.m.
+      </p>
+    </div>
+
+    <div class="buscador">
+      <label class="solo-lectores" for="busqueda">Buscar en la carta</label>
+      <input type="search" id="busqueda" placeholder="Buscar un plato… (picada, hamburguesa, costilla)" autocomplete="off">
+      <span data-icono="buscar" aria-hidden="true"></span>
+    </div>
+
+    <div class="filtros" id="filtros" role="group" aria-label="Filtrar por categoría"></div>
+
+    <div id="carta"></div>
+
+  </div>
+</main>
+
+<footer class="footer cuero">
+  <div class="contenedor">
+    <div class="footer__grid">
+      <div>
+        <img class="footer__logo" src="statics/logo-transparente.png" alt="Texas Parrilla Bar">
+        <p class="footer__desc">
+          Parrilla, bar y sabor llanero en Restrepo y Cumaral, Meta.
+          Con verdadero sabor a parrilla desde el primer día.
+        </p>
+        <div class="redes" id="redes"></div>
+      </div>
+
+      <div>
+        <h4>El sitio</h4>
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="index.html#historia">La casa</a></li>
+          <li><a href="carta.html">La carta</a></li>
+          <li><a href="index.html#sedes">Sedes</a></li>
+          <li><a href="index.html#domicilios">Domicilios</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>Contacto</h4>
+        <ul>
+          <li><a href="tel:+573202044872">320 204 4872</a></li>
+          <li><a href="#" id="waFooter" target="_blank" rel="noopener">Pedidos por WhatsApp</a></li>
+          <li><span class="t-suave">Mar – Dom y festivos</span></li>
+          <li><span class="t-suave">4:00 p.m. – 11:00 p.m.</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer__legal">
+      <span>© <span id="anio"></span> TEXAS · Parrilla Bar. Todos los derechos reservados.</span>
+      <span class="t-suave">Sitio de demostración · sistema de domicilios en modo prueba</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/datos.js"></script>
+<script src="js/iconos.js"></script>
+<script src="js/carrito.js"></script>
+<script src="js/app.js"></script>
+<script src="js/carta.js"></script>
+</body>
+</html>
