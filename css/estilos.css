@@ -508,9 +508,30 @@ h1, h2, h3, h4 { line-height: 1.06; font-weight: 400; color: var(--crema); }
   inset: 0;
   background-image: url('../statics/hero_responsive.PNG');
   background-size: cover;
-  background-position: center 42%;
+  background-position: var(--hero-foco, center 42%);
+  background-repeat: no-repeat;
   transform: scale(1.08);
   animation: heroDeriva 26s ease-in-out infinite alternate;
+}
+
+/* En vertical la foto es un problema doble: `cover` la amplía tanto que solo
+   se ve un pedazo del pan, y encima centra en el vaquero, dejando la
+   hamburguesa fuera de cuadro.
+
+   La solución es dejar de cubrir y mostrarla como una franja: se fija el
+   ancho (no la altura) para bajar el zoom, se corre el foco hacia la
+   hamburguesa (que vive entre el 58% y el 89% del ancho) y se desvanecen los
+   bordes de arriba y abajo con una máscara para que no queden cortes secos. */
+@media (max-aspect-ratio: 3 / 4) {
+  .hero__fondo::after {
+    /* 250% es el punto justo: más grande vuelve al primerísimo plano de pan y
+       más pequeño la hamburguesa se pierde. El 74% horizontal la deja
+       completa con el vaquero todavía en cuadro. */
+    background-size: 250% auto;
+    background-position: 74% 38%;
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 14%, #000 82%, transparent 100%);
+            mask-image: linear-gradient(to bottom, transparent 0%, #000 14%, #000 82%, transparent 100%);
+  }
 }
 
 @keyframes heroDeriva {
